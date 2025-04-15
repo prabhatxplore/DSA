@@ -23,7 +23,7 @@ int binarySearch(int Arr[], int key, int n)
 {
     // Initializing low and high
     int l = 0, h = n;
-    // loop all the way while low less or equal to high
+    // loop all the way while is low less or equal to high
     while (l <= h)
     {
         int mid = (l + h) / 2;
