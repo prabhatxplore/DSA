@@ -7,7 +7,7 @@ void merge_sorted_arrays(int a[], int l, int m, int r);
 int main()
 
 {
-    int arr[] = {1, 2, 0, 3, 6, 5, 8, 4,5};
+    int arr[] = {0,1,2};
     int len = sizeof(arr) / sizeof(int);
     merge_sort(arr, len);
 
@@ -34,23 +34,26 @@ void merge_sort_recursion(int a[], int l, int r)
 }
 void merge_sorted_arrays(int a[], int l, int m, int r)
 {
-    int left_length = m - l + 1;
-    int right_length = r - m;
-    int temp_left[left_length];
-    int temp_right[right_length];
+    int left_len = m - l + 1;
+    int right_len = r - m;
+    int temp_left[left_len];
+    int temp_right[right_len];
 
     int i, j, k;
-    for (int i = 0; i < left_length; i++)
+    for (int i = 0; i < left_len; i++)
     {
         temp_left[i] = a[l + i];
     }
-    for (int i = 0; i < right_length; i++)
+    for (int i = 0; i < right_len; i++)
     {
         temp_right[i] = a[m + 1 + i];
     }
-    for (i = 0, j = 0, k = l; k <= r; k++)
+
+    i = 0, j = 0, k = l;
+    while (i < left_len && j < right_len)
     {
-        if ((i < left_length) && (j >= right_length || temp_left[i] <= temp_right[j]))
+
+        if (temp_left[i] < temp_right[j])
         {
             a[k] = temp_left[i];
             i++;
@@ -60,5 +63,18 @@ void merge_sorted_arrays(int a[], int l, int m, int r)
             a[k] = temp_right[j];
             j++;
         }
+        k++;
+    }
+
+    for (; i < left_len; i++)
+    {
+        a[k] = temp_left[i];
+
+        k++;
+    }
+    for (; j < right_len; j++)
+    {
+        a[k] = temp_right[j];
+        k++;
     }
 }
