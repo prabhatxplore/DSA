@@ -34,7 +34,7 @@ void merge_sort_recursion(int a[], int l, int r)
 }
 void merge_sorted_arrays(int a[], int l, int m, int r)
 {
-    int left_len = m - l + 1;
+    int left_len =( m - l) + 1;
     int right_len = r - m;
     int temp_left[left_len];
     int temp_right[right_len];
