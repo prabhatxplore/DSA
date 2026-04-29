@@ -11,10 +11,10 @@ int main()
     scanf("%d %d", &a, &b);
 
     char text[100], cipher[100];
-    printf("Enter the message");
+    printf("Enter the message : ");
     scanf("%s", text);
-
-    for (int i = 0; text[i] != '\0'; i++)
+    int i = 0;
+    for (i; text[i] != '\0'; i++)
     {
 
         if (text[i] >= 'a' && text[i] <= 'z')
@@ -22,14 +22,49 @@ int main()
 
             cipher[i] = (a * (text[i] - 'a') + b) % 26 + 'a';
         }
+        else
+        {
+            cipher[i] = (a * (text[i] - 'A') + b) % 26 + 'A';
+        }
     }
-    printf("Cipher text %s", cipher);
+    cipher[i] = '\0';
+    printf("Cipher text %s\n", cipher);
 
-    // decrypt
-    for(int i = 0 ; cipher[i] != '\0' ;i++){
+    char msg[100];
+    int inv, flag;
 
-        
+    for (i = 0; i < 26; i++)
+    {
+        flag = (a * i) % 26;
+        printf("flag : %d\n", flag);
+        if (flag == 1)
+        {
+            inv = i;
+            break;
+        }
     }
+
+    if (flag != 1)
+    {
+        printf("Selected value a doesnot have inverse");
+        return 0;
+    }
+
+    for (i = 0; cipher[i] != '\0'; i++)
+    {
+
+        if (cipher[i] >= 'a' && cipher[i] <= 'z')
+        {
+            msg[i] = (inv * (((cipher[i] - 'a') - b + 26)) % 26) % 26 + 'a';
+        }
+        else
+        {
+
+            msg[i] = (inv * (((cipher[i] - 'A') - b + 26)) % 26) % 26 + 'A';
+        }
+    }
+
+    printf("\nEncrypted : %s \t Decrypted : %s", cipher, msg);
 
     return 0;
 }
